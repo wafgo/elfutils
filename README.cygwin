@@ -1,0 +1,5 @@
+  autoreconf -i -f && \
+  ./configure  --disable-symbol-versioning --enable-maintainer-mode && \
+  make
+
+it will fail to build the binutils replacement tools, but the required libs will be built correctly
