@@ -56,12 +56,12 @@ libasm_pic_a_SOURCES =
 am_libasm_pic_a_OBJECTS = $(libasm_a_SOURCES:.c=.os)
 
 libasm_so_DEPS = ../lib/libeu.a ../libebl/libebl.a ../libelf/libelf.so ../libdw/libdw.so
-libasm_so_LDLIBS = $(libasm_so_DEPS)
+libasm_so_LDLIBS = $(libasm_so_DEPS) -lintl
 if USE_LOCKS
 libasm_so_LDLIBS += -lpthread
 endif
 
-libasm_so_LIBS = libasm_pic.a
+libasm_so_LIBS = libasm_pic.a 
 libasm_so_SOURCES =
 libasm.so$(EXEEXT): $(srcdir)/libasm.map $(libasm_so_LIBS) $(libasm_so_DEPS)
 	$(AM_V_CCLD)$(LINK) $(dso_LDFLAGS) -o $@ \

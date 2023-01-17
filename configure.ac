@@ -42,7 +42,7 @@ AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_FILES([config/Makefile])
 
 AC_COPYRIGHT([Copyright (C) 1996-2018 The elfutils developers.])
-AC_PREREQ(2.63)			dnl Minimum Autoconf version required.
+AC_PREREQ([2.71])			dnl Minimum Autoconf version required.
 
 dnl We use GNU make extensions; automake 1.10 defaults to -Wportability.
 AM_INIT_AUTOMAKE([gnits 1.11 -Wno-portability dist-bzip2 no-dist-gzip parallel-tests])
@@ -86,6 +86,7 @@ AS_IF([test "$use_locks" = yes],
 AH_TEMPLATE([USE_LOCKS], [Defined if libraries should be thread-safe.])
 
 AC_PROG_CC
+gl_EARLY
 AC_PROG_RANLIB
 AC_PROG_YACC
 AM_PROG_LEX
@@ -490,13 +491,15 @@ fi
 AC_SUBST([argp_LDADD])
 
 dnl The directories with content.
-
+AC_CONFIG_MACRO_DIRS([gnulib/m4])
 dnl Documentation.
 dnl Commented out for now.
 dnl AC_CONFIG_FILES([doc/Makefile])
 
 dnl Support library.
 AC_CONFIG_FILES([lib/Makefile])
+
+AC_CONFIG_FILES([gnulib/lib/Makefile])
 
 dnl ELF library.
 AC_CONFIG_FILES([libelf/Makefile])
@@ -633,6 +636,7 @@ AC_CHECK_PROG(HAVE_BUNZIP2, bunzip2, yes, no)
 if test "$HAVE_BUNZIP2" = "no"; then
   AC_MSG_WARN([No bunzip2, needed to run make check])
 fi
+gl_INIT
 
 AC_OUTPUT
 

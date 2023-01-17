@@ -1,4 +1,4 @@
-## Process this file with automake to create Makefile.in
+	## Process this file with automake to create Makefile.in
 ##
 ## Copyright (C) 2000-2010, 2013, 2016, 2017 Red Hat, Inc.
 ## This file is part of elfutils.

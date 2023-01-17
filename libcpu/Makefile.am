@@ -29,8 +29,8 @@
 ##
 include $(top_srcdir)/config/eu.am
 AM_CPPFLAGS += -I$(srcdir)/../libelf -I$(srcdir)/../libebl \
-	    -I$(srcdir)/../libdw -I$(srcdir)/../libasm
-AM_CFLAGS += $(fpic_CFLAGS) -fdollars-in-identifiers
+	    -I$(srcdir)/../libdw -I$(srcdir)/../libasm -I$(srcdir)/../gnulib/lib
+AM_CFLAGS += $(fpic_CFLAGS) -fdollars-in-identifiers -Wno-error
 LEXCOMPILE = $(LEX) $(LFLAGS) $(AM_LFLAGS) -P$(<F:lex.l=)
 LEX_OUTPUT_ROOT = lex.$(<F:lex.l=)
 AM_YFLAGS = -p$(<F:parse.y=)
@@ -82,7 +82,7 @@ i386_lex_CFLAGS = -Wno-unused-label -Wno-unused-function -Wno-sign-compare
 i386_parse.o: i386_parse.c i386.mnemonics
 i386_parse_CFLAGS = -DNMNES="`wc -l < i386.mnemonics`"
 i386_lex.o: i386_parse.h
-i386_gendis_LDADD = $(libeu) -lm
+i386_gendis_LDADD = $(libeu) -lm -lintl ../gnulib/lib/libgnu.a
 
 i386_parse.h: i386_parse.c ;
 
